@@ -28,13 +28,13 @@ public class FacultyService {
         return facultyRepository.findAllByColor(colour);
     }
 
+    public Collection<Student> findStudentsByFaculty(Long facultyId) {
+        return getFacultyById(facultyId).getStudents();
+    }
+
     public Collection<Faculty> getFacultyByNameOrColor(String name, String colour) {
         return facultyRepository.findFacultyByNameIgnoreCaseOrColorIgnoreCase(name, colour);
     }
-
-    //public Faculty findFacultyByStudents(Collection<Student> students) {
-       // return facultyRepository.findFacultyByStudents(students);
-    //}
 
     public Faculty updateFaculty(Faculty faculty) {
         return facultyRepository.save(faculty);
