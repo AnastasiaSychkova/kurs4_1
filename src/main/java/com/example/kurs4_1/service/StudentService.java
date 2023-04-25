@@ -9,7 +9,7 @@ import java.util.Collection;
 
 @Service
 public class StudentService {
-    private  final StudentRepository studentRepository;
+    private final StudentRepository studentRepository;
 
     public StudentService(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
@@ -32,6 +32,10 @@ public class StudentService {
         return studentRepository.findStudentByAgeBetween(min, max);
     }
 
+    public Faculty findFacultyByStudent(Long studentId) {
+        return getStudentById(studentId).getFaculty();
+    }
+
     public Student updateStudent(Student student) {
         return studentRepository.save(student);
     }
@@ -40,7 +44,4 @@ public class StudentService {
         studentRepository.deleteById(id);
     }
 
-    public Collection<Student> getStudentsByFaculty(Faculty faculty) {
-        return studentRepository.findStudentsByFaculty(faculty);
-    }
 }

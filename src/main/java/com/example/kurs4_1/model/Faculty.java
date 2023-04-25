@@ -29,6 +29,10 @@ public class Faculty {
         this.color = color;
     }
 
+    public Collection<Student> getStudents() {
+        return students;
+    }
+
     public Long getId() {
         return id;
     }
@@ -52,6 +56,7 @@ public class Faculty {
     public void setColor(String color) {
         this.color = color;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
