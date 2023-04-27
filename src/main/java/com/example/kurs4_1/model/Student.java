@@ -23,6 +23,10 @@ public class Student {
         this.age = age;
     }
 
+    public Faculty getFaculty() {
+        return faculty;
+    }
+
     public Long getId() {
         return id;
     }
