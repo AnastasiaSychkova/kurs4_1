@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 @RestController
 @RequestMapping("/student")
@@ -64,5 +65,20 @@ public class StudentController {
     @DeleteMapping("{id}")
     public void deleteStudent(@PathVariable Long id) {
         studentService.deleteStudent(id);
+    }
+
+    @GetMapping("/count")
+    public long getCount() {
+        return studentService.getAllCount();
+    }
+
+    @GetMapping("/average-age")
+    public double getAverageAge() {
+        return studentService.getAverageAge();
+    }
+
+    @GetMapping("/last-five-students")
+    public List<Student> getLastFiveStudent() {
+        return studentService.getLastFiveStudent();
     }
 }

@@ -6,6 +6,7 @@ import com.example.kurs4_1.repositories.StudentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 
 @Service
 public class StudentService {
@@ -42,6 +43,18 @@ public class StudentService {
 
     public void deleteStudent(Long id) {
         studentRepository.deleteById(id);
+    }
+
+    public long getAllCount() {
+        return studentRepository.count();
+    }
+
+    public double getAverageAge() {
+        return studentRepository.getAverageAge();
+    }
+
+    public List<Student> getLastFiveStudent() {
+        return studentRepository.getLastFiveStudentById();
     }
 
 }

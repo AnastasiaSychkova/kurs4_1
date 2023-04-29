@@ -5,6 +5,7 @@ import com.example.kurs4_1.model.Avatar;
 import com.example.kurs4_1.model.Student;
 import com.example.kurs4_1.repositories.AvatarRepository;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -12,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 
 import static java.nio.file.StandardOpenOption.CREATE_NEW;
 
@@ -22,7 +24,8 @@ public class AvatarService {
     private String avatarsDir;
     private StudentService studentService;
     private AvatarRepository avatarRepository;
-    public AvatarService(StudentService studentService, AvatarRepository avatarRepository){
+
+    public AvatarService(StudentService studentService, AvatarRepository avatarRepository) {
         this.studentService = studentService;
         this.avatarRepository = avatarRepository;
     }
@@ -48,10 +51,17 @@ public class AvatarService {
         avatar.setData(avatarFile.getBytes());
         avatarRepository.save(avatar);
     }
+
     private String getExtensions(String fileName) {
         return fileName.substring(fileName.lastIndexOf(".") + 1);
     }
-    public Avatar findByStudentId(Long studentId){
+
+    public Avatar findByStudentId(Long studentId) {
         return avatarRepository.findByStudentId(studentId);
+    }
+
+    public List<Avatar> getAll(int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return avatarRepository.findAll(pageRequest).getContent();
     }
 }
