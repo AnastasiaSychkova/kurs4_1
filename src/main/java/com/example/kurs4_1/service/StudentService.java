@@ -48,6 +48,9 @@ public class StudentService {
     public long getAllCount() {
         return studentRepository.count();
     }
+    public Collection<Student> findStudentsByName(String name){
+        return studentRepository.findStudentsByName(name);
+    }
 
     public double getAverageAge() {
         return studentRepository.getAverageAge();

@@ -53,7 +53,14 @@ public class StudentController {
         return studentService.findFacultyByStudent(id);
     }
 
+    @GetMapping("/findStudentsByName")
+    public ResponseEntity<Collection<Student>> findStudentsByName(@RequestParam String name) {
+        Collection<Student> students = studentService.findStudentsByName(name);
+        return ResponseEntity.ok(students);
+    }
+
     @PutMapping
+
     public ResponseEntity<Student> updateStudent(@RequestBody Student student) {
         Student student1 = studentService.updateStudent(student);
         if (student1 == null) {
