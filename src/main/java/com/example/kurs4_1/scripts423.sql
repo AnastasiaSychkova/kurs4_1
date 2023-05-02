@@ -1,0 +1,2 @@
+SELECT student.name, student.age, faculty.name FROM student FULL OUTER JOIN faculty ON student.faculty_id = faculty.id
+SELECT student.name, student.age FROM avatar INNER JOIN student ON avatar.student_id = student.id
