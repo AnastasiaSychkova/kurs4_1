@@ -2,17 +2,15 @@ package com.example.kurs4_1.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
 
 @Entity
+@Table(name = "faculty")
 public class Faculty {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String color;
@@ -27,6 +25,10 @@ public class Faculty {
         this.id = id;
         this.name = name;
         this.color = color;
+    }
+
+    public Collection<Student> getStudents() {
+        return students;
     }
 
     public Long getId() {
@@ -52,6 +54,7 @@ public class Faculty {
     public void setColor(String color) {
         this.color = color;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
