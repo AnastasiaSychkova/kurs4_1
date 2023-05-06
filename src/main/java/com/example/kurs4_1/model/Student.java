@@ -4,9 +4,10 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
+@Table(name = "student")
 public class Student {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private int age;
@@ -21,6 +22,10 @@ public class Student {
         this.id = id;
         this.name = name;
         this.age = age;
+    }
+
+    public Faculty getFaculty() {
+        return faculty;
     }
 
     public Long getId() {
