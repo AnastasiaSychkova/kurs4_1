@@ -97,5 +97,47 @@ public class StudentService {
                 .orElse(0);
     }
 
+    public void printAllStudentsName() {
+        logger.info("Was invoked method for printAllStudentsName");
+        List<Student> students = studentRepository.findAll();
+
+        System.out.println(students.get(0).getName());
+        System.out.println(students.get(1).getName());
+
+        new Thread(() -> {
+            System.out.println(students.get(2).getName());
+            System.out.println(students.get(3).getName());
+        }).start();
+
+        new Thread(() -> {
+            System.out.println(students.get(4).getName());
+            System.out.println(students.get(5).getName());
+        }).start();
+    }
+
+    public void printAllStudentsNameWithSynchronized() {
+
+        logger.info("Was invoked method for printAllStudentsNameWithSynchronized");
+        List<Student> students = studentRepository.findAll();
+
+        printStudentSync(students, 0);
+        printStudentSync(students, 1);
+
+        new Thread(() -> {
+            printStudentSync(students, 2);
+            printStudentSync(students, 3);
+        }).start();
+
+        new Thread(() -> {
+            printStudentSync(students, 4);
+            printStudentSync(students, 5);
+        }).start();
+    }
+
+    private void printStudentSync(List<Student> students, int index) {
+        synchronized (this) {
+            System.out.println(students.get(index).getName());
+        }
+    }
 
 }

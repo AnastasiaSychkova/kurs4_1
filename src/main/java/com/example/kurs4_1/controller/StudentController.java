@@ -69,6 +69,16 @@ public class StudentController {
         return studentService.getAllAvgAge();
     }
 
+    @GetMapping("/printAllStudentsName")
+    public void printAllStudentsName(){
+        studentService.printAllStudentsName();
+    }
+
+    @GetMapping("/printAllStudentsNameWithSynchronized")
+    public void printAllStudentsNameWithSynchronized(){
+        studentService.printAllStudentsNameWithSynchronized();
+    }
+
     @PutMapping
 
     public ResponseEntity<Student> updateStudent(@RequestBody Student student) {
