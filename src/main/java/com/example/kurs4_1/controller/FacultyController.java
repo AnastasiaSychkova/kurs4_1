@@ -49,6 +49,14 @@ public class FacultyController {
     public Collection<Student> findStudentsByFaculty(@RequestParam Long facultyId) {
         return facultyService.findStudentsByFaculty(facultyId);
     }
+    @GetMapping("/getLongestNameFaculty")
+    public String getLongestNameFaculty(){
+        return facultyService.getLongestNameFaculty();
+    }
+    @GetMapping("/integerValue")
+    public Integer integerValue(){
+        return facultyService.integerValue();
+    }
 
     @PutMapping
     public ResponseEntity<Faculty> updateFaculty(@RequestBody Faculty faculty) {

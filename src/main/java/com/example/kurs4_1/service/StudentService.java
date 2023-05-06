@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -60,7 +61,8 @@ public class StudentService {
         logger.info("Was invoked method for getAllCount");
         return studentRepository.count();
     }
-    public Collection<Student> findStudentsByName(String name){
+
+    public Collection<Student> findStudentsByName(String name) {
         logger.info("Was invoked method for findStudentsByName");
         return studentRepository.findStudentsByName(name);
     }
@@ -74,5 +76,26 @@ public class StudentService {
         logger.info("Was invoked method for getLastFiveStudent");
         return studentRepository.getLastFiveStudentById();
     }
+
+    public List<String> getAll() {
+        logger.info("Was invoked method for getAll");
+        List<Student> students = studentRepository.findAll();
+        return students.stream()
+                .map(student -> student.getName())
+                .map(s -> s.toUpperCase())
+                .filter(name -> name.startsWith("A"))
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
+    public Double getAllAvgAge() {
+        logger.info("Was invoked method for getAllAvgAge");
+        List<Student> students = studentRepository.findAll();
+        return students.stream()
+                .mapToDouble(student -> student.getAge())
+                .average()
+                .orElse(0);
+    }
+
 
 }

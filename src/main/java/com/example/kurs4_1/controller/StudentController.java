@@ -59,6 +59,16 @@ public class StudentController {
         return ResponseEntity.ok(students);
     }
 
+    @GetMapping("/getAll")
+    public List<String> getAll(){
+        return studentService.getAll();
+    }
+
+    @GetMapping("/getAllAvgAge")
+    public Double getAllAvgAge(){
+        return studentService.getAllAvgAge();
+    }
+
     @PutMapping
 
     public ResponseEntity<Student> updateStudent(@RequestBody Student student) {

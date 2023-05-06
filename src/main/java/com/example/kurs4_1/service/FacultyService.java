@@ -7,7 +7,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
+import java.util.List;
+
 import java.util.Collection;
+import java.util.stream.Stream;
 
 
 @Service
@@ -53,5 +57,22 @@ public class FacultyService {
     public void deleteFaculty(Long id) {
         logger.info("Was invoked method for deleteFaculty");
         facultyRepository.deleteById(id);
+    }
+
+    public String getLongestNameFaculty() {
+        List<Faculty> faculties = facultyRepository.findAll();
+        return faculties.stream()
+                .map(faculty -> faculty.getName())
+                .max(Comparator.comparingInt(name -> name.length()))
+                .orElse("No name");
+    }
+
+    public Integer integerValue() {
+         int sum = Stream
+                 .iterate(1, a -> a + 1)
+                .parallel()
+                .limit(1_000_000)
+                .reduce(0, (a, b) -> a + b);
+         return sum;
     }
 }
